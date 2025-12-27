@@ -424,3 +424,50 @@
             box-shadow: 0 0 12px var(--border-glow);
         }
 
+        .input-area input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border: none;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+        }
+
+        .send-btn:hover {
+            box-shadow: 0 0 15px var(--border-glow);
+        }
+
+        .send-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* 3. Right Sidebar Panels */
+        .right-sidebar {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            height: 100%;
+        }
+
+        .sidebar-panel {
+            background-color: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
