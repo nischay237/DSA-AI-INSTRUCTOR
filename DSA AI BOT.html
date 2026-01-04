@@ -566,3 +566,50 @@
         }
 
         /* About Text styling */
+        .about-text {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            font-weight: 500;
+        }
+
+        /* Dynamic Pages (Initially Hidden) */
+        .tab-view {
+            width: 80%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .tab-content-scroll {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .category-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            border-left: 3px solid var(--accent-secondary);
+            padding-left: 12px;
+            margin-bottom: 4px;
+            margin-top: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
