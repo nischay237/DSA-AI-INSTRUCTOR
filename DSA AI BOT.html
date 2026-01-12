@@ -613,3 +613,50 @@
     </style>
 </head>
 <body>
+
+    <div class="container">
+        <!-- 1. LEFT SIDEBAR -->
+        <div class="sidebar">
+            <div class="logo-section">
+                <div class="logo-box">AI</div>
+                <div class="logo-text">
+                    <h2>DSA Instructor</h2>
+                    <p>by NISHCHAY</p>
+                </div>
+            </div>
+            
+            <div class="menu-items">
+                <button onclick="switchTab('dashboard')" id="menu-dashboard" class="menu-item active">
+                    <i class="fa-solid fa-house"></i> Dashboard
+                </button>
+                <button onclick="switchTab('tutorials')" id="menu-tutorials" class="menu-item">
+                    <i class="fa-solid fa-book"></i> Tutorials
+                </button>
+                <button onclick="switchTab('history')" id="menu-history" class="menu-item">
+                    <i class="fa-solid fa-history"></i> History
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. CENTER SECTION (DASHBOARD TAB) -->
+        <div class="center-section" id="view-dashboard-center">
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+                <div class="metric-info">
+                    <h1>1,000+</h1>
+                    <p>Problems Explained</p>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <div class="messages-area" id="chat-messages">
+                    <!-- Bot Welcome Message -->
+                    <div class="message-row bot">
+                        <div class="avatar bot-avatar">
+                            <i class="fa-regular fa-face-smile"></i>
+                        </div>
+                        <div class="message-content">
+                            Hii!! HOW CAN I HELP U BUT ONLY IN DSA 😊
+                        </div>
