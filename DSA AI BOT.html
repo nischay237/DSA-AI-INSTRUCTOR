@@ -660,3 +660,51 @@
                         <div class="message-content">
                             Hii!! HOW CAN I HELP U BUT ONLY IN DSA 😊
                         </div>
+                    </div>
+                </div>
+
+                <!-- Image preview indicator before sending -->
+                <div class="image-preview-container" id="image-preview-container"></div>
+
+                <div class="input-area">
+                    <!-- Hidden input for file upload -->
+                    <input type="file" id="image-input" accept="image/*" style="display: none;" onchange="handleImageSelect(event)">
+                    
+                    <button class="attach-btn" onclick="triggerImageUpload()" title="Attach image / code screenshot">
+                        <i class="fa-solid fa-paperclip"></i>
+                    </button>
+                    
+                    <div class="input-wrapper">
+                        <input type="text" id="chat-input" placeholder="Ask about arrays, linked lists..." onkeydown="handleKeyPress(event)">
+                    </div>
+                    <button class="send-btn" onclick="sendMessage()">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. RIGHT SIDEBAR (DASHBOARD TAB) -->
+        <div class="right-sidebar" id="view-dashboard-right">
+            <!-- Tutorials Box -->
+            <div class="sidebar-panel">
+                <div class="panel-title">
+                    <i class="fa-solid fa-book"></i> Tutorials
+                </div>
+                <div class="tutorial-buttons">
+                    <button class="tutorial-btn" onclick="askQuestion('What is an Array?')">What is an Array?</button>
+                    <button class="tutorial-btn" onclick="askQuestion('Explain Linked Lists')">Explain Linked Lists</button>
+                    <button class="tutorial-btn" onclick="askQuestion('What is Big O Notation?')">What is Big O Notation?</button>
+                    <button class="tutorial-btn" onclick="askQuestion('Teach me about Stacks')">Teach me about Stacks</button>
+                    <button class="tutorial-btn" onclick="askQuestion('What are Hash Tables?')">What are Hash Tables?</button>
+                </div>
+            </div>
+
+            <!-- Recent History Box -->
+            <div class="sidebar-panel">
+                <div class="panel-title" style="justify-content: space-between; width: 100%;">
+                    <span><i class="fa-solid fa-history"></i> Recent History</span>
+                    <button onclick="clearAllHistory()" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.8rem;" onmouseover="this.style.color='var(--accent-pink)'" onmouseout="this.style.color='var(--text-muted)'">Clear All</button>
+                </div>
+                <div class="history-list" id="recent-history">
+                    <!-- JS populated -->
