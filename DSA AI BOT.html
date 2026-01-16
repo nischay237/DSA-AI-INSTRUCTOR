@@ -755,3 +755,50 @@
                     </div>
 
                 </div>
+            </div>
+        </div>
+
+        <!-- 5. DEDICATED HISTORY VIEW -->
+        <div class="tab-view" id="view-history">
+            <div class="sidebar-panel" style="height: 100%;">
+                <div class="panel-title" style="font-size: 1.1rem; justify-content: space-between; width: 100%; color: var(--text-main);">
+                    <span><i class="fa-solid fa-clock-rotate-left"></i> Full Search History</span>
+                    <button onclick="clearAllHistory()" style="background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 15px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-pink)'; this.style.color='var(--accent-pink)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-main)'">
+                        <i class="fa-solid fa-trash-can"></i> Clear All
+                    </button>
+                </div>
+                <div class="tab-content-scroll">
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">Click on any previous query to ask it again:</p>
+                    <div class="history-list" id="full-history-list" style="gap: 12px;">
+                        <!-- JS populated -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT & API CALL -->
+    <script>
+        // ==========================================
+        // 🔑 APNI GEMINI API KEY YAHA LGAO
+        // ==========================================
+        const GEMINI_API_KEY = "AQ.Ab8RN6JII2D10yl3Hoa7L-3FeJPHnwibQp7ROIwESA0yzzbj2w"; 
+
+        const messagesContainer = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const historyContainer = document.getElementById('recent-history');
+        const fullHistoryContainer = document.getElementById('full-history-list');
+        const previewContainer = document.getElementById('image-preview-container');
+
+        let selectedImageBase64 = null;
+        let selectedImageMimeType = null;
+
+        // Load History from LocalStorage (with default value if empty)
+        let searchHistory = JSON.parse(localStorage.getItem('dsa_ai_history'));
+        if (!searchHistory) {
+            searchHistory = ["HI"];
+            localStorage.setItem('dsa_ai_history', JSON.stringify(searchHistory));
+        }
+
+        // SPA Tab Switching Logic
