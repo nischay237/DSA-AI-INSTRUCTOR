@@ -850,3 +850,50 @@
             reader.onload = function(e) {
                 // Get raw base64 data by stripping standard prefix
                 selectedImageBase64 = e.target.result.split(',')[1];
+                showImagePreview(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Display small image thumbnail above chat bar
+        function showImagePreview(src) {
+            previewContainer.innerHTML = `
+                <div class="image-preview-wrapper">
+                    <img src="${src}" />
+                    <button onclick="removeSelectedImage()">&times;</button>
+                </div>
+            `;
+            previewContainer.style.display = 'block';
+        }
+
+        // Clear uploaded image
+        function removeSelectedImage() {
+            selectedImageBase64 = null;
+            selectedImageMimeType = null;
+            document.getElementById('image-input').value = '';
+            previewContainer.innerHTML = '';
+            previewContainer.style.display = 'none';
+        }
+
+        // Sidebar card click listener
+        function askQuestion(questionText) {
+            // Automatically switch back to dashboard/chat tab
+            switchTab('dashboard');
+            chatInput.value = questionText;
+            sendMessage();
+        }
+
+        function appendMessage(text, sender, imgUrl = null) {
+            const row = document.createElement('div');
+            row.className = `message-row ${sender}`;
+
+            const avatar = document.createElement('div');
+            avatar.className = `avatar ${sender}-avatar`;
+            if (sender === 'bot') {
+                avatar.innerHTML = `<i class="fa-regular fa-face-smile"></i>`;
+            } else {
+                avatar.innerHTML = `<i class="fa-regular fa-user"></i>`;
+            }
+
+            const bubble = document.createElement('div');
+            bubble.className = 'message-content';
