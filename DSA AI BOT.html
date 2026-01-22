@@ -802,3 +802,51 @@
         }
 
         // SPA Tab Switching Logic
+        function switchTab(tabName) {
+            // Remove active class from all menu buttons
+            document.getElementById('menu-dashboard').classList.remove('active');
+            document.getElementById('menu-tutorials').classList.remove('active');
+            document.getElementById('menu-history').classList.remove('active');
+
+            // Hide all tab views
+            document.getElementById('view-dashboard-center').style.display = 'none';
+            document.getElementById('view-dashboard-right').style.display = 'none';
+            document.getElementById('view-tutorials').style.display = 'none';
+            document.getElementById('view-history').style.display = 'none';
+
+            // Show active tab view
+            if (tabName === 'dashboard') {
+                document.getElementById('menu-dashboard').classList.add('active');
+                document.getElementById('view-dashboard-center').style.display = 'flex';
+                document.getElementById('view-dashboard-right').style.display = 'flex';
+            } else if (tabName === 'tutorials') {
+                document.getElementById('menu-tutorials').classList.add('active');
+                document.getElementById('view-tutorials').style.display = 'flex';
+            } else if (tabName === 'history') {
+                document.getElementById('menu-history').classList.add('active');
+                document.getElementById('view-history').style.display = 'flex';
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Trigger file input
+        function triggerImageUpload() {
+            document.getElementById('image-input').click();
+        }
+
+        // Process file upload & convert to base64
+        function handleImageSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            selectedImageMimeType = file.type;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Get raw base64 data by stripping standard prefix
+                selectedImageBase64 = e.target.result.split(',')[1];
