@@ -897,3 +897,50 @@
 
             const bubble = document.createElement('div');
             bubble.className = 'message-content';
+
+            // Agar user ne pic bheji ho to chat message me dikhein
+            if (imgUrl) {
+                const img = document.createElement('img');
+                img.src = imgUrl;
+                img.className = 'chat-sent-img';
+                bubble.appendChild(img);
+            }
+            
+            const textSpan = document.createElement('span');
+            if (sender === 'bot') {
+                textSpan.innerHTML = formatMarkdown(text);
+            } else {
+                textSpan.innerText = text;
+            }
+            bubble.appendChild(textSpan);
+
+            row.appendChild(avatar);
+            row.appendChild(bubble);
+            messagesContainer.appendChild(row);
+            
+            // Auto scroll down
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            return row;
+        }
+
+        // Create History Element with delete button
+        function createHistoryElement(text, originalIndex, isShort = false) {
+            const item = document.createElement('div');
+            item.className = 'history-item';
+
+            const textSpan = document.createElement('span');
+            textSpan.className = 'history-item-text';
+            textSpan.innerText = isShort && text.length > 25 ? text.substring(0, 22) + "..." : text;
+            textSpan.onclick = () => askQuestion(text);
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'history-delete-btn';
+            deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+            deleteBtn.title = "Delete this item";
+            deleteBtn.onclick = (e) => {
+                e.stopPropagation();
+                deleteHistoryItem(originalIndex);
+            };
+
+            item.appendChild(textSpan);
+            item.appendChild(deleteBtn);
