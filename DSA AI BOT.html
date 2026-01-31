@@ -944,3 +944,51 @@
 
             item.appendChild(textSpan);
             item.appendChild(deleteBtn);
+            return item;
+        }
+
+        // Render recent and full history lists
+        function renderHistory() {
+            historyContainer.innerHTML = '';
+            fullHistoryContainer.innerHTML = '';
+
+            if (searchHistory.length === 0) {
+                historyContainer.innerHTML = '<div style="color: var(--text-muted); font-size: 0.85rem; padding: 10px;">No history yet.</div>';
+                fullHistoryContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No search history found.</p>';
+                return;
+            }
+
+            // Render Recent History (last 5 items, reversed)
+            const recentItems = searchHistory.slice(-5).reverse();
+            recentItems.forEach((text, index) => {
+                const originalIndex = searchHistory.length - 1 - index;
+                const element = createHistoryElement(text, originalIndex, true);
+                historyContainer.appendChild(element);
+            });
+
+            // Render Full History (all items, reversed)
+            const fullItems = [...searchHistory].reverse();
+            fullItems.forEach((text, index) => {
+                const originalIndex = searchHistory.length - 1 - index;
+                const element = createHistoryElement(text, originalIndex, false);
+                fullHistoryContainer.appendChild(element);
+            });
+        }
+
+        // Add item to history array
+        function addHistoryItem(text) {
+            // Avoid duplicates at the end of stack
+            if (searchHistory.length > 0 && searchHistory[searchHistory.length - 1] === text) {
+                return;
+            }
+            searchHistory.push(text);
+            localStorage.setItem('dsa_ai_history', JSON.stringify(searchHistory));
+            renderHistory();
+        }
+
+        // Delete single item from history array
+        function deleteHistoryItem(index) {
+            searchHistory.splice(index, 1);
+            localStorage.setItem('dsa_ai_history', JSON.stringify(searchHistory));
+            renderHistory();
+        }
