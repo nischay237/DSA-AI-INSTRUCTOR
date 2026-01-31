@@ -992,3 +992,50 @@
             localStorage.setItem('dsa_ai_history', JSON.stringify(searchHistory));
             renderHistory();
         }
+
+        // Delete all items from history
+        function clearAllHistory() {
+            if (confirm("Are you sure you want to clear all search history?")) {
+                searchHistory = [];
+                localStorage.setItem('dsa_ai_history', JSON.stringify(searchHistory));
+                renderHistory();
+            }
+        }
+
+        // Markdown parser handles Code block visual arts properly
+        function formatMarkdown(text) {
+            let temp = text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+            
+            // Bold (**text**)
+            temp = temp.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // Inline Code (`code`)
+            temp = temp.replace(/`(.*?)`/g, '<code>$1</code>');
+            // Code Blocks (```code```)
+            temp = temp.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+            // Linebreaks
+            temp = temp.replace(/\n/g, '<br>');
+            return temp;
+        }
+
+        async function sendMessage() {
+            const query = chatInput.value.trim();
+            if (!query && !selectedImageBase64) return;
+
+            let userQuery = query;
+            if (!userQuery && selectedImageBase64) {
+                userQuery = "Explain this image";
+            }
+
+            // Display user message & attached image in chat
+            let imgUrlToSend = null;
+            if (selectedImageBase64) {
+                imgUrlToSend = `data:${selectedImageMimeType};base64,${selectedImageBase64}`;
+            }
+            appendMessage(userQuery, 'user', imgUrlToSend);
+            chatInput.value = '';
+            addHistoryItem(userQuery);
+
+            // Save visual base64 state, then clear interface previews
