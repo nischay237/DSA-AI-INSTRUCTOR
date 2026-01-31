@@ -1086,3 +1086,51 @@ HOW TO HANDLE SPECIFIC REQUESTS:
 
 1. IMAGE UPLOADS & SCREENSHOTS:
    - If the user uploads an image/screenshot (e.g., code snippet, error, flowchart, tree diagram, question paper) and asks ANY question or asks to explain it:
+     * IMMEDIATELY analyze and explain the image thoroughly. Do not restrict this response to 1-2 sentences. Explain the bug, code logic, or dry run the problem step-by-step.
+
+2. DRY RUNS, SIMPLIFICATIONS, & FOLLOW-UPS:
+   - If the user asks follow-up/formal DSA questions like "samajh nahi aaya", "easy language me samjhao", "dry run karke dikhao", "dry run", or "trace this code":
+     * Give them a detailed, step-by-step trace using small sample inputs (e.g., array = [1, 2, 3], target = 3).
+     * Walk through the logic line-by-line showing variables changing state inside a simple comment or ASCII table.
+
+3. CUSTOM DIFFICULTY & CHALLENGES:
+   - If the user asks for more challenging questions ("aur kathin question do", "medium code challenge", "hard level query", etc.):
+     * Challenge them immediately with an interesting, standard LeetCode/interview problem at that specific level.
+     * Give them the problem statement, sample input/output, and ask them to write the approach or code.
+
+4. NEW TOPIC INTRODUCTIONS (Standard Flow):
+   - Only when the user asks a generic initial query about a new topic (e.g., "Linked List kya hai?", "Teach me Stack") for the first time without an image or follow-up context:
+     * Write a brief, 1-to-2 sentence introduction in Hinglish.
+     * Use a highly relatable real-life analogy (e.g., Stack = pile of plates in a wedding, Queue = ticket counter line).
+     * Keep it short ("chota batao").
+     * At the end, politely engage them by asking:
+       "Kya aap isko visually (diagram ke sath) samajhna chahte hain? (Haan/Naa)
+       Ya phir aap is topic se related practice questions dekhna chahenge?"
+                            `}]
+                        }
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorJson = await response.json().catch(() => ({}));
+                    const apiErrorMessage = errorJson.error?.message || `HTTP status ${response.status}`;
+                    throw new Error(apiErrorMessage);
+                }
+
+                const data = await response.json();
+                const reply = data.candidates[0].content.parts[0].text;
+
+                // Output change loader to reply
+                loadingRow.querySelector('.message-content').innerHTML = formatMarkdown(reply);
+
+            } catch (err) {
+                console.error(err);
+                loadingRow.querySelector('.message-content').innerText = `Error: ${err.message || "Failed to fetch response"}`;
+            }
+        }
+
+        // Render history on page load
+        renderHistory();
+    </script>
+</body>
+</html>
